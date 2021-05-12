@@ -1,0 +1,18 @@
+language: node_js
+cache: yarn
+services: docker
+node_js: '14'
+
+### Build
+script:
+  - yarn install
+  - yarn build
+  - yarn run test:ci
+  - cd ../../
+
+## Publish
+deploy:
+  provider: script
+  script: bash deploy.sh
+  on:
+    tags: true   
